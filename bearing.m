@@ -1,0 +1,11 @@
+datpath=fullfile('Bearing');
+imageSize=[128 128 3];
+imds=imageDatastore(datpath,'IncludeSubfolders',true,'LabelSource','foldernames');
+table=countEachLabel(imds)
+aimds=augmentedImageDatastore(imageSize,imds);
+%numTrainingFiles = 6;
+%[imdsTrain,imdsTest] = splitEachLabel(imds,numTrainingFiles,'randomize');
+aimds1=partitionByIndex(aimds,[1:180]);
+%aimds2=partitionByIndex(aimds,[151:180]);
+options=trainingOptions('adam','ValidationData',aimds1,'ValidationFrequency',1,'plots','training-progress');
+net = trainNetwork(aimds1,part,options);
