@@ -19,3 +19,8 @@ for i = 1:4
 end
 figure(2)
 plotconfusion(imdsTest.Labels,pred)
+fruit=imread('C:\Users\Juvith\Desktop\Fruit\Grapes');
+is=[227 227 1];
+aim1=augmentedImageDatastore(is,fruit);
+label=classify(net,aim1);
+sprintf('The loaded image belongs to %s class', label)
